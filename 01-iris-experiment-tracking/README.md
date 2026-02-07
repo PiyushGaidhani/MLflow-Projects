@@ -55,6 +55,29 @@ Max Iterations: 1000
 
 Accuracy: ~96.67%
 
+## 📸 MLflow UI Screenshots
+
+### Experiments Dashboard
+![MLflow Experiments Dashboard](images/MLflow-Experiments-Dashboard.png)
+*Overview of all experiments in the MLflow tracking server*
+
+### Experiment Runs View
+![MLflow Runs View](images/MLflow-Runs-View.png)
+*Comparing two experiment runs with different solvers (lbfgs vs newton-cg)*
+
+### Run Details
+![MLflow Run Details](images/MLflow-Run-Details.png)
+*Detailed view of a single run showing parameters (solver: newton-cg, max_iter: 1000), metrics (accuracy: 96.67%), and registered model information*
+
+### Model Comparison
+![MLflow Model Comparison](images/MLflow-Model-Comparison.png)
+*Side-by-side comparison of model parameters and performance metrics*
+
+### Model Registry
+![MLflow Model Registry](images/MLflow-Model-Registry.png)
+*Model registry showing the "tracking-quickstart" model with version management*
+
+
 🔍 MLflow Features Implemented
 Experiment Tracking
 mlflow.set_tracking_uri() - Set MLflow tracking server
