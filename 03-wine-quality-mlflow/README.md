@@ -1,44 +1,47 @@
-Wine Quality Prediction with MLflow & Streamlit
-Predict white wine quality using machine learning, track experiments with MLflow, serve the best model as a REST API, and interact with it via a Streamlit web app.
+# Wine Quality Prediction with MLflow & Streamlit
 
-1. Project overview
-This project uses the UCI Wine Quality dataset (white wine) to predict a quality score based on 11 physicochemical features (acidity, sugar, sulphates, alcohol, etc.).
+Predict white wine quality using machine learning, track experiments with **MLflow**, serve the best model as a REST API, and interact with it via a **Streamlit** web app.[web:86][web:101]
+
+---
+
+## 1. Project overview
+
+This project uses the UCI Wine Quality dataset (white wine) to predict a quality score based on 11 physicochemical features (acidity, sugar, sulphates, alcohol, etc.).[web:101]
 
 It demonstrates an end‑to‑end MLOps workflow:
 
-Data preparation and model training in a notebook.
+- Data preparation and model training in a notebook.
+- Hyperparameter tuning and experiment tracking with **MLflow**.
+- Model registration and serving via **MLflow Model Registry**.[web:107]
+- A simple REST client (`test_wine_quality_api.py`) that calls the `/invocations` endpoint.
+- A **Streamlit** UI that lets users move sliders and see predicted wine quality in real time.[web:97][web:99]
 
-Hyperparameter tuning and experiment tracking with MLflow.
+---
 
-Model registration and serving via MLflow Model Registry.
+## 2. Tech stack
 
-A simple REST client (test_wine_quality_api.py) that calls /invocations.
+- Python, NumPy, Pandas
+- Scikit‑learn (**RandomForestRegressor** as deployed model)
+- TensorFlow / Keras for ANN experiments (not deployed due to Keras 3 SavedModel issues)
+- MLflow for tracking, model registry, and serving
+- Streamlit for the front‑end web app[web:86][web:101]
 
-A Streamlit UI that lets users move sliders and see predicted wine quality in real time.
+---
 
-2. Tech stack
-Python, NumPy, Pandas
+## 3. Repository structure
 
-Scikit‑learn (RandomForestRegressor as deployed model)
-
-TensorFlow / Keras for ANN experiments (not deployed due to Keras 3 SavedModel issues)
-
-MLflow for tracking, model registry, and serving
-
-Streamlit for the front‑end web app
-
-3. Repository structure
-Example layout (adapt to your repo):
+```text
 MLflow-Projects/
-└── 02-wine-quality-mlflow/
-    ├── Starter.ipynb                 # Notebook: EDA, training, MLflow logging
+└── 03-wine-quality-mlflow/
+    ├── wine_quality_mlflow.ipynb     # Notebook: EDA, training, MLflow logging
     ├── test_wine_quality_api.py      # Python client to call MLflow REST API
     ├── app.py                        # Streamlit UI for predictions
     ├── requirements.txt              # Project dependencies
     ├── README.md                     # This file
-    └── mlruns/                       # Local MLflow tracking directory (auto-created, usually gitignored)
+    └── mlruns/                       # Local MLflow tracking directory (gitignored)
+```
 
-4. Setup
+## 4. Setup
 Clone the repository and navigate to the project folder:
 
 git clone <your_repo_url>
@@ -46,14 +49,14 @@ cd MLflow-Projects/02-wine-quality-mlflow
 
 Create a virtual environment and install dependencies:
 pip install -r requirements.txt
-# or, minimally:
+ or, minimally:
 pip install mlflow scikit-learn pandas numpy streamlit requests
 
 (Optional) Start MLflow UI to explore experiments:
 mlflow ui
-# Open http://127.0.0.1:5000
+ Open http://127.0.0.1:5000
 
-5. Training and experiment tracking
+## 5. Training and experiment tracking
 Model development is done in Starter.ipynb:
 
 Load the white wine quality dataset.
@@ -94,14 +97,14 @@ After selecting the best run in MLflow UI:
 Register the model in MLflow Model Registry (e.g., name wine-quality-model) and assign a stage (e.g., Production).​
 
 Serve the registered model locally:
-# From the project directory
+ From the project directory
 mlflow models serve \
   -m "models:/wine-quality-model/Production" \
   -p 5001 --no-conda
 
   This starts a local REST API on http://127.0.0.1:5001/invocations.
 
-7. Testing the REST API (/invocations)
+## 7. Testing the REST API (/invocations)
 You can test the endpoint either with curl or the provided Python script.
 
 Curl example
@@ -136,7 +139,7 @@ Status: 200
 Body: {"predictions": [5.925]}
 Prediction JSON: {'predictions': [5.925]}
 
-8. Streamlit web app
+## 8. Streamlit web app
 The Streamlit app (app.py) provides a simple UI to interact with the MLflow model without touching curl or Python scripts.​​
 
 Key features:
@@ -153,7 +156,7 @@ Run the app:
 streamlit run app.py
 Then open the URL shown in the terminal (usually http://localhost:8501) and interact with the UI.
 
-9. Possible extensions
+## 9. Possible extensions
 Ideas for future improvements:
 
 Containerize the model server and Streamlit app with Docker for portability.
